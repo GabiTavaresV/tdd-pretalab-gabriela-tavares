@@ -1,25 +1,32 @@
-const Queue = require('./queue')
+const Queue = require("./queue");
 
-describe('Queue', () => {
-  it('Deve criar uma fila', () => {
-    const queue = new Queue()
+describe("Queue", () => {
+  let queue;
 
-    expect(queue).toEqual({ elements: []})
-  })
+  beforeEach(() => {
+    queue = new Queue([1, 2, 3]);
+  });
 
-  it('Deve ser capaz de calcular o tamanho da fila', () => {
-    // Seu código aqui
-  })
+  it("Deve criar uma fila", () => {
+    expect(queue).toEqual({ elements: [1, 2, 3] });
+  });
 
-  it('Deve ser capaz de adicionar um item na fila', () => {
-   // Seu código aqui
-  })
+  it("Deve ser capaz de calcular o tamanho da fila", () => {
+    expect(queue.getTamanho()).toBe(3);
+  });
 
-  it('Deve escolher o primeiro item da fila', () => {
-    // Seu código aqui
-  })
+  it("Deve ser capaz de adicionar um item na fila", () => {
+    queue = new Queue([1, 2, 3]);
+    queue.adicionaItemFila(4);
+    expect(queue.elements).toEqual([1, 2, 3, 4]);
+  });
 
-  it('Deve remover o primeiro item da fila', () => {
-    // Seu código aqui
-  })
-})
+  it("Deve escolher o primeiro item da fila", () => {
+    expect(queue.retornaPrimeiroItem()).toEqual(1);
+  });
+
+  it("Deve remover o primeiro item da fila", () => {
+    expect(queue.removePrimeiroItem()).toBe(1);
+    expect(queue.elements).toEqual([2, 3]);
+  });
+});
